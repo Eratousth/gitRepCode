@@ -1,6 +1,25 @@
 import java.util.*;
 import java.lang.Math;
 
+/*
+Hello! This is a small game called October Hunt. 
+
+The objective of the game is to reach a hidden treasure on the map.
+When you find the treasure the win counter goes up, meaning you gained a point.
+There is an aid in the form of a little indicator saying how far you are from the treasure
+but it does not say the direction.
+
+Controls:
+w - Up
+s - Down
+a - Left
+d - Right
+
+y - quits the game
+
+(For Phoenix Force Robotics, Victor Perete McIntyre)
+*/
+
 public class OctoberHunt {
     static int random(int max){
 
