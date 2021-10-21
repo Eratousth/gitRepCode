@@ -1,31 +1,40 @@
 import java.util.*;
 public class OctoberHunt {
-    static void Game(int x, int y){
-        for (int i = 1; i <= 9; i++){
+    static void Game(int x, int y, int min, int max){
+        for (int i = min; i <= max; i++){
             System.out.println("");
-            for (int e = 1; e <= 9; e++){
+            for (int e = min; e <= max; e++){
                 if (i == y && e == x) {
                 System.out.print(" o");
-                } 
-                else {
+                }else {
                     System.out.print(" *");
                 }
             }
         }
     }
     public static void main(String[] arg){
+        //Direction dictionary for w a s d
         Hashtable<String, Integer> directions = new Hashtable<String, Integer>();
 
+        //Player's beginning coordinates
         int player_x = 5; 
         int player_y = 5;
 
+        //Max and min values for board size and range
+        int max = 5;
+        int min = 1;
+
+        //Applying values to w a s d
         directions.put("w",-1);
         directions.put("s", 1);
         directions.put("a",-1);
         directions.put("d", 1);
+
+        //int number = random.nextInt(max - min) + min;
         
+        //Game loop
         while(true){
-            Game(player_x,player_y);
+            Game(player_x,player_y,min,max);
 
             System.out.println("\nWhich direction would you like to go?");
             Scanner d = new Scanner(System.in);
@@ -34,17 +43,21 @@ public class OctoberHunt {
             if (direction.equals("y")){
                 break;
             }else if (direction.equals("w") || direction.equals("s")){
-                if (player_y >= 1 || player_y <= 9){
-                    player_y += directions.get(direction);
-                }else{;}
+                player_y += directions.get(direction);
+                if (player_y > max){
+                    player_y = min;
+                }else if (player_y < min){
+                    player_y = max;
+                }
 
             }else if (direction.equals("a") || direction.equals("d")){
-                if (player_y >= 1 || player_y <= 9){
-                    player_x += directions.get(direction);
-                }else{;}
+                player_x += directions.get(direction);
+                if (player_x > max){
+                    player_x = min;
+                }else if (player_x < min){
+                    player_x = max;
+                }
             }else{System.out.println("Not a valid argument!");}
         }
     }
 }
-//victor you are a very round person
-
