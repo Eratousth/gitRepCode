@@ -83,8 +83,8 @@ public class OctoberHunt {
                         if (treasure_x != player_x && treasure_y != player_y){
                             break;
                         }else{
-                            treasure_x = (int)(Math.random() * max);
-                            treasure_y = (int)(Math.random() * max);
+                            treasure_x = random(max);
+                            treasure_y = random(max);
                         }
                     }
                 }else{
