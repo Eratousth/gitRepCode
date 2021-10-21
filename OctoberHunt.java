@@ -3,10 +3,13 @@ import java.lang.Math;
 
 public class OctoberHunt {
     static int random(int max){
+
+        //generates random value inbetween 1 and max
         return (int)(Math.random()*(max-1)) + 1;
     }
     static boolean Game(int x, int y, int min, int max, int treasure_x, int treasure_y){
         boolean ans = false;
+
         //Board generate
         for (int i = min; i <= max; i++){
             System.out.println("");
@@ -29,6 +32,7 @@ public class OctoberHunt {
         return ans;
     }
     public static void main(String[] arg){
+
         //Direction dictionary for w a s d
         Hashtable<String, Integer> directions = new Hashtable<String, Integer>();
 
