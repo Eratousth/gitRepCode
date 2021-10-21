@@ -2,21 +2,31 @@ import java.util.*;
 import java.lang.Math;
 
 public class OctoberHunt {
-    static void Game(int x, int y, int min, int max, int treasure_x, int treasure_y){
+    static int random(int max){
+        return (int)(Math.random()*(max-1)) + 1;
+    }
+    static boolean Game(int x, int y, int min, int max, int treasure_x, int treasure_y){
+        boolean ans = false;
+        //Board generate
         for (int i = min; i <= max; i++){
             System.out.println("");
             for (int e = min; e <= max; e++){
                 if (i == y && e == x) {
                     if (y == treasure_y && x == treasure_x){
                         System.out.print(" $");
+                        ans = true;
                     }else{
                         System.out.print(" o");
                     }
                 }else {
                     System.out.print(" *");
                 }
+                
             }
         }
+
+        //If game is a win, then return win
+        return ans;
     }
     public static void main(String[] arg){
         //Direction dictionary for w a s d
@@ -29,7 +39,7 @@ public class OctoberHunt {
         directions.put("d", 1);
 
         //Max and min values for board size and range
-        int max = 16;
+        int max = 7;
         int min = 1;
 
         //Player's beginning coordinates
@@ -37,24 +47,48 @@ public class OctoberHunt {
         int player_y = max/2;
 
         //Treasure's coordinates
-        int treasure_x = (int)(Math.random() * max);
-        int treasure_y = (int)(Math.random() * max);
+        int treasure_x = random(max);
+        int treasure_y = random(max);
         while(true){
             if (treasure_x != player_x && treasure_y != player_y){
                 break;
             }else{
-                treasure_x = (int)(Math.random() * max);
-                treasure_y = (int)(Math.random() * max);
+                treasure_x = random(max);
+                treasure_y = random(max);
             }
         }
 
-        //int number = random.nextInt(max - min) + min;
+        //Point counter
+        int wins = 0;
         
         //Game loop
         while(true){
-            Game(player_x, player_y, min, max, treasure_x, treasure_y);
 
-            //Character direction
+            //Initializes game
+            boolean game = Game(player_x, player_y, min, max, treasure_x, treasure_y);
+
+            //Checks if game was a win and asks if to continue
+            if (game){
+                wins += 1;
+                System.out.println("\nTotal points:\t" + wins + "\nDo you want to continue? [y/n]");
+                Scanner yn = new Scanner(System.in);
+                String choice = yn.nextLine();
+
+                if (choice.equals("y")){
+                    while(true){
+                        if (treasure_x != player_x && treasure_y != player_y){
+                            break;
+                        }else{
+                            treasure_x = (int)(Math.random() * max);
+                            treasure_y = (int)(Math.random() * max);
+                        }
+                    }
+                }else{
+                    break;
+                }
+            }
+
+            //Character direction input and logic
             System.out.println("\nWhich direction would you like to go?\n(" + treasure_x + ", " + treasure_y + ")");
             Scanner d = new Scanner(System.in);
             String direction = d.nextLine();
@@ -68,7 +102,6 @@ public class OctoberHunt {
                 }else if (player_y < min){
                     player_y = max;
                 }
-
             }else if (direction.equals("a") || direction.equals("d")){
                 player_x += directions.get(direction);
                 if (player_x > max){
