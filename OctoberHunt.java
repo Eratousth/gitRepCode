@@ -92,9 +92,13 @@ public class OctoberHunt {
                 }
             }
 
+            //Distance between player and treasure
+            int distance = (int)Math.sqrt((Math.pow(player_x - treasure_x,2) + Math.pow(player_y - treasure_y, 2)));
+            //System.out.println("\nx = " + (player_x - treasure_x));
+            //System.out.println("\ny = " + (player_y - treasure_y));
+            
             //Character direction input and logic
-            System.out.println("\nWhich direction would you like to go?\n(" + treasure_x + ", " + treasure_y + ")");
-            Scanner d = new Scanner(System.in);
+            System.out.println("\nWhich direction would you like to go?\n(You are " + distance + " units away from treasure)");            Scanner d = new Scanner(System.in);
             String direction = d.nextLine();
 
             if (direction.equals("y")){
