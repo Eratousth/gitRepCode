@@ -15,7 +15,7 @@ s - Down
 a - Left
 d - Right
 
-y - quits the game
+e - exits the game
 
 (For Phoenix Force Robotics, Victor Perete McIntyre)
 */
@@ -23,10 +23,12 @@ y - quits the game
 public class OctoberHunt {
     static int random(int max){
 
-        //generates random value inbetween 1 and max
+        //Generates random value inbetween 1 and max
         return (int)(Math.random()*(max-1)) + 1;
     }
     static boolean Game(int x, int y, int min, int max, int treasure_x, int treasure_y){
+
+        //Win boolean
         boolean ans = false;
 
         //Board generate
@@ -62,7 +64,7 @@ public class OctoberHunt {
         directions.put("d", 1);
 
         //Max and min values for board size and range
-        int max = 7;
+        int max = 5;
         int min = 1;
 
         //Player's beginning coordinates
@@ -99,20 +101,24 @@ public class OctoberHunt {
 
                 if (choice.equals("y")){
                     while(true){
+
+                        //Repositions treasure
                         if (treasure_x != player_x && treasure_y != player_y){
+                            Game(player_x, player_y, min, max, treasure_x, treasure_y);
                             break;
                         }else{
                             treasure_x = random(max);
                             treasure_y = random(max);
                         }
                     }
-                }else{
+                }else {
                     break;
                 }
             }
 
             //Distance between player and treasure
             int distance = (int)Math.sqrt((Math.pow(player_x - treasure_x,2) + Math.pow(player_y - treasure_y, 2)));
+
             //System.out.println("\nx = " + (player_x - treasure_x));
             //System.out.println("\ny = " + (player_y - treasure_y));
             
@@ -120,7 +126,7 @@ public class OctoberHunt {
             System.out.println("\nWhich direction would you like to go?\n(You are " + distance + " units away from treasure)");            Scanner d = new Scanner(System.in);
             String direction = d.nextLine();
 
-            if (direction.equals("y")){
+            if (direction.equals("e")){
                 break;
             }else if (direction.equals("w") || direction.equals("s")){
                 player_y += directions.get(direction);
@@ -136,7 +142,7 @@ public class OctoberHunt {
                 }else if (player_x < min){
                     player_x = max;
                 }
-            }else{System.out.println("Not a valid argument!");}
+            }else{System.out.println("Not a valid direction!");}
         }
     }
 }
